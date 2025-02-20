@@ -78,7 +78,7 @@ Right now, I have a CSV that represents my town map that is being loaded directl
 
 I'm gonna go ahead and make a quick csv by hand to test this, using random sprites from the sprite sheet I downloaded. I realized during this process that having to calculate everything in pixel coordinates is pretty annoying, so I might want to think of a better way in the future, but this will do for now. After that I wrote some super hacky code to load these in my Game class and then pass them in when I make my rendering system.
 
-[Pic]
+![Random sprites in my town map](https://github.com/toricook/cotw-devlog/blob/main/cotw/sprites-in-the-town.PNG)
 
 The problem, of course, is that I don't want to have to load every single sprite my game will ever use right at the initialization phase. Not only would it be horribly inefficent, but my game is also going to have random dungeon generation, random enemies spawning, random loot drops, etc. so I don't even *know* what sprites my game is going to need. For that we need...
 
@@ -231,3 +231,5 @@ An immediate downside I notice here is that the classes that inherit from GameOb
 The check of whether the GameObject implements IRenderable is fast because we know this at compile time, so we're just checking the metadata (not using reflection). So I'm willing to overlook how wasteful this seems for now (yes, we are calling this at 60 fps and yes, we could do better if we just kept track of what is/isn't renderable rather than checking every time). Mainly I just don't want to write more code than I have to, and there aren't going to be a lot of objects in this game. But it is starting to be more clear why more traditional ECS would be better.
 
 ANYWAY, I can now change my hacky sprite loading code to simply create the sprites and not do anything with them, and the act of creation will add them to the ObjectList where the Renderer can find them. By making these changes, I can confirm that this is indeed the case. WOOHOO!!
+
+![Random sprites in my town map](https://github.com/toricook/cotw-devlog/blob/main/cotw/sprites-in-the-town.PNG)
