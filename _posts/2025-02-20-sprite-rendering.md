@@ -78,7 +78,7 @@ Right now, I have a CSV that represents my town map that is being loaded directl
 
 I'm gonna go ahead and make a quick csv by hand to test this, using random sprites from the sprite sheet I downloaded. I realized during this process that having to calculate everything in pixel coordinates is pretty annoying, so I might want to think of a better way in the future, but this will do for now. After that I wrote some super hacky code to load these in my Game class and then pass them in when I make my rendering system.
 
-![Random sprites in my town map](https://github.com/toricook/cotw-devlog/blob/main/cotw/sprites-in-the-town.PNG)
+![Random sprites in my town map](https://toricook.github.io/cotw-devlog/assets/sprites-in-the-town.PNG)
 
 The problem, of course, is that I don't want to have to load every single sprite my game will ever use right at the initialization phase. Not only would it be horribly inefficent, but my game is also going to have random dungeon generation, random enemies spawning, random loot drops, etc. so I don't even *know* what sprites my game is going to need. For that we need...
 
@@ -232,7 +232,7 @@ The check of whether the GameObject implements IRenderable is fast because we kn
 
 ANYWAY, I can now change my hacky sprite loading code to simply create the sprites and not do anything with them, and the act of creation will add them to the ObjectList where the Renderer can find them. By making these changes, I can confirm that this is indeed the case. WOOHOO!!
 
-![Random sprites in my town map](https://github.com/toricook/cotw-devlog/blob/main/cotw/sprites-in-the-town.PNG)
+![Random sprites in my town map](https://toricook.github.io/cotw-devlog/assets/sprites-in-the-town.PNG)
 
 # Sprite Loading Revisited
 
@@ -245,12 +245,12 @@ We'll probably want some more stuff related to the scene, but for now the scene 
 
 Once that class is done, I want to put in the actual sprites that are in that town. Most of them aren't in my spritsheet, sadly, so I had to take some screenshots from the game and make my own.
 
-![Random sprites in my town map](/assets/town-sprites.png)
+![Random sprites in my town map](https://toricook.github.io/cotw-devlog/assets/town-sprites.png)
 (I realized after this that the sign was actually in the sprite sheet. Damn).
 
 Then I did some painstaking counting to figure out where my sprites need to go. At this point, I also realized that I need to apply the same camera offset that I did to the tilemap, or everything will be messed up. I may handle this differently in the future but for now I'm just going to add a Vector2 input to the Render() method on the IRenderables and pass that in to the RenderingSystem. Figuring out where exactly to place each sprite, by the way, was a HUGE pain in the ass. I probably should have drawn these onto my tilemap instead, but alas. At least this sprite rendering code will help with our future, moveable sprites, hopefully. GAH.
 
-![The town with all the stuff](/assets/town-with-stuff.gif)
+![Random sprites in my town map](https://toricook.github.io/cotw-devlog/assets/town-sprites.png)
 
 A couple notes
 * The little farm sprite next to the houses at the top isn't quite right. Also made me realize that the colors I got from screenshotting the game are not exactly the same as the ones from my sheet. Will file this away under general sprite maintenance that I need to do later.
