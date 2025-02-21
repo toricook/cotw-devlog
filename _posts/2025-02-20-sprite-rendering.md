@@ -233,3 +233,25 @@ The check of whether the GameObject implements IRenderable is fast because we kn
 ANYWAY, I can now change my hacky sprite loading code to simply create the sprites and not do anything with them, and the act of creation will add them to the ObjectList where the Renderer can find them. By making these changes, I can confirm that this is indeed the case. WOOHOO!!
 
 ![Random sprites in my town map](https://github.com/toricook/cotw-devlog/blob/main/cotw/sprites-in-the-town.PNG)
+
+# Sprite Loading Revisited
+
+After all this work, I still have barely done anything to improve the appearance of my little town, which was the whole point. So I am going to revisit my sprite loading code and try to make it more reusable and clean before I get the real sprites in there. As I wander around the town and mines in Castle of the Winds, I notice that each little area has a name, and the one I just drew is called "A Tiny Hamlet". I'm going to call these areas "Scenes". A Scene will have:
+
+* A Tilemap, which is the thing we created last time -- A list of tiles and positions
+* A list of sprites and positions that should be in the scene
+
+We'll probably want some more stuff related to the scene, but for now the scene is just a way for us to keep track of which sprite file goes with which tilemap. The scene will have a Load() function that will call the function that parses the Tilemap from a CSV, and then it will parse the sprite CSV. I'll initialize the scene in the Game constructor by hardcoding the paths to the two CSVs (a hack for now). 
+
+Once that class is done, I want to put in the actual sprites that are in that town. Most of them aren't in my spritsheet, sadly, so I had to take some screenshots from the game and make my own.
+
+[pic']
+(I realized after this that the sign was actually in the sprite sheet. Damn).
+
+Then I did some painstaking counting to figure out where my sprites need to go. At this point, I also realized that I need to apply the same camera offset that I did to the tilemap, or everything will be messed up. I may handle this differently in the future but for now I'm just going to add a Vector2 input to the Render() method on the IRenderables and pass that in to the RenderingSystem. Figuring out where exactly to place each sprite, by the way, was a HUGE pain in the ass. I probably should have drawn these onto my tilemap instead, but alas. At least this sprite rendering code will help with our future, moveable sprites, hopefully. GAH.
+
+A couple notes
+* The little farm sprite next to the houses at the top isn't quite right. Also made me realize that the colors I got from screenshotting the game are not exactly the same as the ones from my sheet. Will file this away under general sprite maintenance that I need to do later.
+* I left out that little hay bucket because I can't find it. Whatever.
+* That well in the middle has slime on it in the sprite sheet, and there isn't a normal one. Pretty sure this is a SPOILER for later in the game, but anyway, whatevs.
+
