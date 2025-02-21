@@ -250,7 +250,7 @@ Once that class is done, I want to put in the actual sprites that are in that to
 
 Then I did some painstaking counting to figure out where my sprites need to go. At this point, I also realized that I need to apply the same camera offset that I did to the tilemap, or everything will be messed up. I may handle this differently in the future but for now I'm just going to add a Vector2 input to the Render() method on the IRenderables and pass that in to the RenderingSystem. Figuring out where exactly to place each sprite, by the way, was a HUGE pain in the ass. I probably should have drawn these onto my tilemap instead, but alas. At least this sprite rendering code will help with our future, moveable sprites, hopefully. GAH.
 
-![Random sprites in my town map](https://toricook.github.io/cotw-devlog/assets/town-sprites.png)
+![Random sprites in my town map](https://toricook.github.io/cotw-devlog/assets/town-with-stuff.gif)
 
 A couple notes
 * The little farm sprite next to the houses at the top isn't quite right. Also made me realize that the colors I got from screenshotting the game are not exactly the same as the ones from my sheet. Will file this away under general sprite maintenance that I need to do later.
